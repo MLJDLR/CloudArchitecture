@@ -21,10 +21,10 @@ public class StudentResource {
         return studentService.findAll();
     }
 
-   @DeleteMapping("/items/{studentName}") //We delete the selected name then we display if the action could be done
+    @DeleteMapping("/items/{studentName}") //We delete the selected name then we display if the action could be done
     public String deleteStudent(@PathVariable String studentName) {
-       int result = studentService.delete(studentName);
-       return (result == -1) ? studentName + " doesn't exist" : studentName + " was deleted";
+        int result = studentService.delete(studentName);
+        return (result == -1) ? studentName + " doesn't exist" : studentName + " was deleted";
     }
 
     @PostMapping("/items") // Specify the endpoint for creating a student

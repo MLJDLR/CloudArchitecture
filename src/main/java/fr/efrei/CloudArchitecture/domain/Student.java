@@ -7,7 +7,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "student_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "sequenceGenerator")
 
 
     private Integer id;
