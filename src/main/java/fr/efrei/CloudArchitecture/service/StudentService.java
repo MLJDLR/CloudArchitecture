@@ -21,8 +21,14 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student update(Student student){
-        return studentRepository.save(student);
+    public Student update(Integer id, String name, int age) {
+        Student stud = studentRepository.findById(id).orElse(null);
+        if (stud != null){
+            stud.setName(name);
+            stud.setAge(age);
+            return studentRepository.save(stud);
+        }
+        return null;
     }
 
     public Integer findStudentIdByName(String name) { //check if student exists and returns its id
@@ -30,7 +36,7 @@ public class StudentService {
         return studentOptional.map(Student::getId).orElse(-1);
     }
 
-    public int delete(String name){ //delete the student if the id returned exist else id is -1 so it doesn't exist
+    public Integer delete(String name){ //delete the student if the id returned exist else id is -1 so it doesn't exist
         Integer id = findStudentIdByName(name);
         if (id != -1) {
             studentRepository.deleteById(id);
@@ -42,9 +48,7 @@ public class StudentService {
         Student newStudent = new Student();
         newStudent.setName(name);
         newStudent.setAge(age);
-
-        // Save the new student to the database
-        return studentRepository.save(newStudent);
+        return studentRepository.save(newStudent); // Save the new student to the database
     }
 }
 
