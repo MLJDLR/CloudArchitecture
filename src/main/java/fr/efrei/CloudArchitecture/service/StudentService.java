@@ -21,22 +21,30 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student save(Student student){
-        return studentRepository.save(student);
-    }//Create
-
     public Student update(Student student){
         return studentRepository.save(student);
     }
 
-    public Integer findStudentIdByName(String name) {
+    public Integer findStudentIdByName(String name) { //check if student exists and returns its id
         Optional<Student> studentOptional = studentRepository.findByName(name);
-        return studentOptional.map(Student::getId).orElse(null);
+        return studentOptional.map(Student::getId).orElse(-1);
     }
 
-    public void delete(String name){
+    public int delete(String name){ //delete the student if the id returned exist else id is -1 so it doesn't exist
         Integer id = findStudentIdByName(name);
-        studentRepository.deleteById(id);
+        if (id != -1) {
+            studentRepository.deleteById(id);
+        }
+        return id;
+    }
+
+    public Student create(String name, int age) {
+        Student newStudent = new Student();
+        newStudent.setName(name);
+        newStudent.setAge(age);
+
+        // Save the new student to the database
+        return studentRepository.save(newStudent);
     }
 }
 

@@ -2,11 +2,7 @@ package fr.efrei.CloudArchitecture.web.rest;
 
 import fr.efrei.CloudArchitecture.domain.Student;
 import fr.efrei.CloudArchitecture.service.StudentService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,14 +16,19 @@ public class StudentResource {
         this.studentService = studentService;
     }
 
-    @GetMapping("/items")
+    @GetMapping("/items") //We display all the students
     public List<Student> getAllStudents(){
         return studentService.findAll();
     }
 
-    @DeleteMapping("/items")
-    public List<Student> deleteStudent() {
-        studentService.delete("Thomas");
-        return studentService.findAll();
+   @DeleteMapping("/items/{studentName}") //We delete the selected name then we display if the action could be done
+    public String deleteStudent(@PathVariable String studentName) {
+       int result = studentService.delete(studentName);
+       return (result == -1) ? studentName + " doesn't exist" : studentName + " was deleted";
+    }
+
+    @PostMapping("/items") // Specify the endpoint for creating a student
+    public Student createStudent(@RequestBody Student student) {
+        return studentService.create(student.getName(), student.getAge());
     }
 }
