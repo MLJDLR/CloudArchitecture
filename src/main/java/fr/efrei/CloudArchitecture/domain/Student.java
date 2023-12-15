@@ -35,4 +35,8 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
