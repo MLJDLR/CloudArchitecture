@@ -23,7 +23,7 @@ public class StudentResourceIT {
 
     @Test //Create
     @Transactional
-    void createStudent() throws Exception {
+    void createStudent() {
         int databaseSizeBeforeCreate = studentRepository.findAll().size();
         assertThat(databaseSizeBeforeCreate).isEqualTo(5); //since we have 5 students at the beginning
 
@@ -74,7 +74,7 @@ public class StudentResourceIT {
         assertThat(deletedStudent).isNull(); //first check if student is well deleted
 
         List<Student> studentList = studentRepository.findAll(); //here is the new size of the db after the deletion
-        assertThat(studentList).isEqualTo(databaseSizeBeforeCreate - 1); //second check with db size
+        assertThat(studentList).hasSize(databaseSizeBeforeCreate - 1); //second check with db size
     }
 }
 
