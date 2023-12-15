@@ -7,8 +7,9 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    private Integer id;
+    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "student_sequence", allocationSize = 1)
+
+    public Integer id;
     private String name;
     private int age;
 
@@ -25,10 +26,6 @@ public class Student {
 
     public String getName() {
         return name;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setName(String name) {
