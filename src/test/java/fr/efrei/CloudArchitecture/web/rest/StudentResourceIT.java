@@ -9,11 +9,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
-//import jakarta.transaction.Transactional;
-
 
 @SpringBootTest
 @TestPropertySource(locations= "classpath:application-test.properties" )
