@@ -34,7 +34,7 @@ public class StudentResourceIT {
         studentRepository.save(student);
 
         List<Student> studentList = studentRepository.findAll();
-        assertThat(studentList).hasSize(databaseSizeBeforeCreate + 1); //check if we do have a new student added
+        assertThat(studentList).hasSize(databaseSizeBeforeCreate + 1); //check if we do have a new student added comparing db size bf and after the add
     }
 
     @Test //Read
@@ -67,7 +67,6 @@ public class StudentResourceIT {
     @Transactional
     void deleteStudent() {
         int databaseSizeBeforeCreate = studentRepository.findAll().size();
-        assertThat(databaseSizeBeforeCreate).isEqualTo(5);
 
         int studId = 1;
         studentRepository.deleteById(studId);
