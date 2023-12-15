@@ -72,7 +72,9 @@ public class StudentResourceIT {
         studentRepository.deleteById(studId);
         Student deletedStudent = studentRepository.findById(studId).orElse(null);
         assertThat(deletedStudent).isNull(); //first check if student is well deleted
-        assertThat(databaseSizeBeforeCreate).isEqualTo(databaseSizeBeforeCreate - 1); //second check with db size
+
+        List<Student> studentList = studentRepository.findAll(); //here is the new size of the db after the deletion
+        assertThat(studentList).isEqualTo(databaseSizeBeforeCreate - 1); //second check with db size
     }
 }
 
